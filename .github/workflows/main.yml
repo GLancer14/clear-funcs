@@ -13,7 +13,6 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps: 
-      - uses: actions/checkout@v4
       - name: Run a test
         run: npm test
       - name: Check coverage
