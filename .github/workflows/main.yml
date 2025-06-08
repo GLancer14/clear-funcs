@@ -2,10 +2,21 @@ name: CI Pipeline
 on: [push]
 
 jobs:
-  build:
+  deploy:
+  runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install
+        
+  test:
+    needs: deploy
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v4
       - name: Run a test
-        run: echo "Testing application"
-      
+        run: npm test
+      - name: Check coverage
+        run: npm run coverage
+      - name: Check codestyle
+        run: npm run lint
